@@ -5,7 +5,7 @@
            SG_SECRET_KEY = credentials("SG_SECRET_KEY")
            registry = "https://registry.hub.docker.com"
        
-           dockerImage = 'dhouari/sg'
+           
         }
   stages {
           
@@ -44,8 +44,8 @@
              
             steps {
 
-              sh 'docker build -t dhouari/sg .'
-              sh 'docker save dhouari/sg -o sg.tar'
+              sh 'docker build -t devopsscan .'
+              sh 'docker save devopsscan -o ds.tar'
               
              } 
            }
@@ -55,7 +55,7 @@
                try {     
            
          
-                    sh './sourceguard-cli --img sg.tar'
+                    sh './sourceguard-cli --img ds.tar'
                     } catch (Exception e) {
     
                  echo "Image scanning is BLOCK and recommend not using the source code"  
