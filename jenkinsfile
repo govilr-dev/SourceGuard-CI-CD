@@ -1,8 +1,8 @@
  pipeline {
       agent any
       environment {
-           SG_CLIENT_ID = credentials("SG_CLIENT_ID")
-           SG_SECRET_KEY = credentials("SG_SECRET_KEY")
+           SG_CLIENT_ID = credentials("18b1dc63-088a-4276-8a7d-8c1ce8c463ba")
+           SG_SECRET_KEY = credentials("e26d621f284c433ca982d403c53864d6")
            registry = "https://registry.hub.docker.com"
        
            
