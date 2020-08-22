@@ -19,14 +19,25 @@
              }
   
           }
-    stage('SourceGuard Code Scan') {   
+
+          stage ('Build') {
+              steps {
+                  sh '''
+               docker rmi govil/SG --force | true
+            
+               '''
+              }
+          }
+    stage('SourceGuard SCA and SAST') {   
        steps {   
-                   
+           parallel (
+            SCA: {
+               echo  'Dependency Check by SourceGuard'
+            },
+            SAST: {       
          script {      
               try {
          
-               
-            
                 sh 'chmod +x sourceguard-cli' 
 
                 sh './sourceguard-cli --src .'
@@ -37,25 +48,26 @@
                   }
               }
             }
+           )
          }
+    }  
            
-           
-          stage('Docker image Build and scan prep') {
+          stage('Staging Setup') {
              
             steps {
 
-              sh 'docker build -t dhouari/sg .'
-              sh 'docker save dhouari/sg -o sg.tar'
+              sh 'docker build -t govil/SG .'
+              sh 'docker save govil/SG -o gr.tar'
               
              } 
            }
-       stage('SourceGuard Container Image Scan') {   
+       stage('Staging Container Image Scan') {   
           steps {
             script {
                try {     
            
          
-                    sh './sourceguard-cli --img sg.tar'
+                    sh './sourceguard-cli --img gr.tar'
                     } catch (Exception e) {
     
                  echo "Image scanning is BLOCK and recommend not using the source code"  
