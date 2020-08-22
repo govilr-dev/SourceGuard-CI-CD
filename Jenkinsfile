@@ -1,11 +1,11 @@
  pipeline {
       agent any
       environment {
-           SG_CLIENT_ID = credentials("xxxxxxxxxx")
-           SG_SECRET_KEY = credentials("xxxxxxxxxx")
+           SG_CLIENT_ID = credentials("SG_CLIENT_ID")
+           SG_SECRET_KEY = credentials("SG_SECRET_KEY")
            registry = "https://registry.hub.docker.com"
        
-           
+           dockerImage = 'dhouari/sg'
         }
   stages {
           
@@ -44,8 +44,8 @@
              
             steps {
 
-              sh 'docker build -t devopsscan .'
-              sh 'docker save devopsscan -o ds.tar'
+              sh 'docker build -t dhouari/sg .'
+              sh 'docker save dhouari/sg -o sg.tar'
               
              } 
            }
@@ -55,7 +55,7 @@
                try {     
            
          
-                    sh './sourceguard-cli --img ds.tar'
+                    sh './sourceguard-cli --img sg.tar'
                     } catch (Exception e) {
     
                  echo "Image scanning is BLOCK and recommend not using the source code"  
