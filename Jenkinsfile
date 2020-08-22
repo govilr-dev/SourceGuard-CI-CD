@@ -36,9 +36,9 @@
             },
             SAST: {       
                sh '''
-               sh 'chmod +x sourceguard-cli' 
+               chmod +x sourceguard-cli' 
 
-                sh './sourceguard-cli --src .'
+                ./sourceguard-cli --src .'
             
                '''
                } 
