@@ -23,7 +23,7 @@
           stage ('Build') {
               steps {
                   sh '''
-               docker rmi govil/SG --force | true
+               docker rmi govil/sg --force | true
             
                '''
               }
@@ -56,8 +56,8 @@
              
             steps {
 
-              sh 'docker build -t govil/SG .'
-              sh 'docker save govil/SG -o gr.tar'
+              sh 'docker build -t govil/sg .'
+              sh 'docker save govil/sg -o gr.tar'
               
              } 
            }
