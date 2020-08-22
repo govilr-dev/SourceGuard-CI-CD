@@ -35,19 +35,14 @@
                echo  'Dependency Check by SourceGuard'
             },
             SAST: {       
-         script {      
-              try {
-         
-                sh 'chmod +x sourceguard-cli' 
+               sh '''
+               sh 'chmod +x sourceguard-cli' 
 
                 sh './sourceguard-cli --src .'
-           
-               } catch (Exception e) {
-    
-                 echo "Request for Approval"  
-                  }
-              }
-            }
+            
+               '''
+               } 
+            
            )
          }
     }  
